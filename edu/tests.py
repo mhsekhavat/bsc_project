@@ -14,7 +14,7 @@ def enroll(student, offering):
 
 def action(func):
     def wrapper(**kwargs):
-        tests = filter(lambda test: test.given(kwargs), all_tests)
+        tests = filter(lambda test: test.when(func, **kwargs) and test.given(**kwargs), all_tests)
         ret = func(**kwargs)
         for test in tests:
             test.then(return_value=ret, **kwargs)
@@ -25,9 +25,11 @@ def action(func):
 class test_1():
     def given(self, student, offering, **kwargs):
         self.old_capacity = offering.capacity
+        return True
 
-    def when(self, func):
+    def when(self, func, **kwargs):
         return func == enroll
+
 
     def then(self, student, offering):
         assert self.old_capacity > 0
