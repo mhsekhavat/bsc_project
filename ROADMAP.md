@@ -7,7 +7,7 @@
       in initialization of application, it should collect all tests
 
 * Metrics
-** coverage = # hit sanity check (given() == True and when() == True)
+** coverage = # hit sanity check (given() == True and when() == True): makes us superior to contracts! (Mehran promised he will remember what this means)
 
 * Optimization: 
 ** prune duplicate/satisfied-a-lot/already-checked tests
@@ -33,4 +33,5 @@ race conditions.
 ** Security?
 ** Relation with Aspect Oriented Design?
 ** Relation with Mutational Testing?
+** vs. Design by Contract
 

@@ -7,22 +7,15 @@
 
 
 # code
+from santest.sclass import SanityCheck
+
+
 @action()
 def enroll(student, offering):
     pass
 
 
-def action(func):
-    def wrapper(**kwargs):
-        tests = filter(lambda test: test.when(func, **kwargs) and test.given(**kwargs), all_tests)
-        ret = func(**kwargs)
-        for test in tests:
-            test.then(return_value=ret, **kwargs)
-
-    return wrapper
-
-
-class test_1():
+class test_1(SanityCheck):
     def given(self, student, offering, **kwargs):
         self.old_capacity = offering.capacity
         return True
