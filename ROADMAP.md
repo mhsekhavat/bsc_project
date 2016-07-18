@@ -22,9 +22,6 @@
 ** we implement a django project for edu, as proof of concept
 ** thesis
 
-
-* check if we can extend it to summer
-
 * About concurrency:
 If the system begins a transaction for each request, it's possible to run sanity checks concurrently without facing 
 race conditions.
