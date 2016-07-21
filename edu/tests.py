@@ -29,7 +29,7 @@ class test_1(SanityCheck):
             assert self.old_capacity > 0
             assert offering.capacity == self.old_capacity - 1
             assert student in offering.students
-            assert student.current_semester_units() <= student.get_max_units()
+            assert student.get_current_semester_units() <= student.get_max_units()
         else:
             pass
             #TODO: assert
