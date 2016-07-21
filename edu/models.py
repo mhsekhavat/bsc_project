@@ -41,4 +41,4 @@ class Enrollment(models.Model):
 
 
 class Semester(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=16)
