@@ -24,8 +24,13 @@ class test_1(SanityCheck):
         return func == enroll
 
 
-    def then(self, student, offering):
-        assert self.old_capacity > 0
-        assert offering.capacity == self.old_capacity - 1
-        assert student in offering.students
-        assert student.current_semester_units() <= student.get_max_units()
+    def then(self, student, offering, return_value):
+        if return_value: #TODO: this condition should be moved to either `when` or `given`
+            assert self.old_capacity > 0
+            assert offering.capacity == self.old_capacity - 1
+            assert student in offering.students
+            assert student.current_semester_units() <= student.get_max_units()
+        else:
+            pass
+            #TODO: assert
+
