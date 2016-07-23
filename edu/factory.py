@@ -1,4 +1,4 @@
-from edu.models import Student, Course, Offering
+from edu.models import Student, Course, Offering, Professor
 import factory
 from factory import fuzzy
 
@@ -11,8 +11,16 @@ class StudentFactory(factory.Factory):
     last_name = factory.Faker('last_name')
 
 
+class ProfessorFactory(factory.Factory):
+    class Meta:
+        model = Professor
+
+    first_name = factory.Faker('first_name')
+    last_name = factory.Faker('last_name')
+
+
 class CourseFactory(factory.Factory):
     class Meta:
         model = Course
 
-    name = fuzzy.FuzzyText()
+    name = fuzzy.FuzzyText(length=8)
