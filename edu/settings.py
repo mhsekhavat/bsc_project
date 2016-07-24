@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'edu',
+
+    'insanity',
 ]
 
 MIDDLEWARE_CLASSES = [

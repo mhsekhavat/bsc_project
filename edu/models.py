@@ -1,6 +1,8 @@
 from django.db import models
 from django.apps import apps
 
+from insanity.action import action
+
 
 class Course(models.Model):
     name = models.CharField(max_length=32)
@@ -29,6 +31,7 @@ class Offering(models.Model):
     professor = models.ForeignKey('edu.Professor')
     capacity = models.IntegerField()
 
+    @action
     def enroll(self, student):
         Enrollment = apps.get_model('edu.Enrollment')
         Enrollment.objects.create(offering=self, student=student)
