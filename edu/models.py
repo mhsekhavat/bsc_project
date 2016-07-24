@@ -33,9 +33,17 @@ class Offering(models.Model):
 
     @action
     def enroll(self, student):
+        if self.capacity == 0:
+            return False
         Enrollment = apps.get_model('edu.Enrollment')
         Enrollment.objects.create(offering=self, student=student)
+        self.capacity = self.capacity - 1
+        self.save()
         return True
+
+    @action
+    def get_students(self):
+        return Student.objects.filter(id__in=self.enrollment_set.values_list('student', flat=True))
 
 
 class Enrollment(models.Model):
