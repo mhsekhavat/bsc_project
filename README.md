@@ -1,4 +1,5 @@
 ```
+npm install
 pip install -r requirements.txt
 ./manage.py migrate
 ./manage.py runscript reset_fixtures

@@ -1,0 +1,23 @@
+{
+  "name": "bsc_project",
+  "version": "1.0.0",
+  "description": "``` pip install -r requirements.txt ./manage.py migrate ./manage.py runscript reset_fixtures ./manage.py runserver_plus ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeMeKh/bsc_project.git"
+  },
+  "author": "Mohammad Hossein Sekhavat <sekhavat17@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SeMeKh/bsc_project/issues"
+  },
+  "homepage": "https://github.com/SeMeKh/bsc_project#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0"
+  }
+}
