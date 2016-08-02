@@ -1,5 +1,6 @@
 {% load bootstrap3 %}
 {% load static %}
+{% load hijack_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +10,11 @@
     <title>{% block title %}(no title){% endblock %}</title>
     <link href="{% static 'edu/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'edu/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'hijack/hijack-styles.css' %}" />
     {% block css %}
     {% endblock %}
 </head>
-<body>
+<body>{% hijack_notification %}
 <script src="{% static 'edu/js/jquery.min.js' %}"></script>
 <script src="{% static 'edu/js/bootstrap.min.js' %}"></script>
 {% block body %}

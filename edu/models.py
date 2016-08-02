@@ -9,8 +9,7 @@ class Course(models.Model):
 
 
 class Student(models.Model):
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
+    user = models.OneToOneField('auth.User', blank=True, null=True)
 
     def get_max_units(self):
         pass
@@ -18,10 +17,15 @@ class Student(models.Model):
     def current_semester_units(self):
         pass
 
+    def __str__(self):
+        return 'Student%d' % (self.id or -1)
+
 
 class Professor(models.Model):
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
+    user = models.OneToOneField('auth.User', blank=True, null=True)
+
+    def __str__(self):
+        return 'Professor%d' % (self.id or -1)
 
 
 class Offering(models.Model):
