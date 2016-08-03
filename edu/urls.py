@@ -3,13 +3,13 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse_lazy
 from django.http.response import HttpResponseForbidden
 from django.views.generic.base import RedirectView, TemplateView
 from functools import wraps
 from edu.models import Student, Professor
-from edu.views import index, student
+from edu.views import index, student, staff
 
 
 def student_required(view):
@@ -38,22 +38,30 @@ def professor_required(view):
     return wrapper
 
 
+staff_required = user_passes_test(lambda user: user.is_staff)
+
 student_urls = [
     url(r'^$', RedirectView.as_view(url=reverse_lazy('student_enrollments')), name='student'),
-    url(r'^enrollments/$', student.EnrollmentListView.as_view(), name='student_enrollments')
+    url(r'^enrollments/$', student.EnrollmentListView.as_view(), name='student_enrollments'),
 ]
 
 professor_urls = [
     url(r'^$', TemplateView.as_view(template_name='edu/dashboard.html'), name='professor'),
 ]
 
+staff_urls = [
+    url(r'^$', RedirectView.as_view(url=reverse_lazy('staff_students')), name='staff'),
+    url(r'^students/$', staff.StudentListView.as_view(), name='staff_students'),
+]
+
 urlpatterns = [
     url(r'^$', index.IndexView.as_view(), name='index'),
     url(r'^student/', decorator_include(student_required, student_urls)),
     url(r'^professor/', decorator_include(professor_required, professor_urls)),
+    url(r'^staff/', decorator_include(staff_required, staff_urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^hijack/', include('hijack.urls')),
-    url(r'^auth/', include('django.contrib.auth.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

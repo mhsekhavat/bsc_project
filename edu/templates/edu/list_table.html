@@ -5,6 +5,13 @@
     {{ page_title }}
 {% endblock %}
 
+{% block header_title %}
+    {{ block.super }}
+    {% if create_url %}
+        <a href="{{ create_url }}" class="btn btn-default pull-right">Add</a>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {% include 'edu/bootstrap-table.html' %}
 {% endblock content %}

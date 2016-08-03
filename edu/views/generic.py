@@ -17,6 +17,7 @@ class PageTitleMixin(object):
 class TableView(PageTitleMixin, TemplateView):
     Table = NotImplemented
     template_name = 'edu/list_table.html'
+    create_url = None
 
     def get_queryset(self, **kwargs):
         return self.Table.Meta.model.objects.all()
@@ -29,6 +30,7 @@ class TableView(PageTitleMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TableView, self).get_context_data(**kwargs)
         context['table'] = self.get_table(**kwargs)
+        context['create_url'] = self.create_url
         return context
 
     def get_page_title(self, **kwargs):

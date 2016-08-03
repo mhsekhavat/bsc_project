@@ -11,5 +11,8 @@ class IndexView(RedirectView):
             return reverse('student')
         if hasattr(user, 'professor'):
             return reverse('professor')
-
+        if user.is_staff:
+            return reverse('staff')
+        if user.is_superuser:
+            return '/admin/auth/user/'
         raise Exception('Neither Professor Nor Student')
