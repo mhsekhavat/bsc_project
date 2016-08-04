@@ -1,18 +1,35 @@
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
-from django_tables2 import tables, columns
+from django.views.generic.edit import UpdateView, DeleteView
+from django_tables2 import tables, columns, A
 
-from edu.models import Student
-from edu.views.generic import TableView
+from edu.models import Student, Professor
+from edu.views.generic import TableView, EDUUpdateView, EDUDeleteView, EDUCreateView, create_basic_crud
 
+user_views = create_basic_crud(
+    User, 'staff_user',
+    create_fields=['username', 'first_name', 'last_name'],
+    edit_fields=['username', 'first_name', 'last_name'],
+    list_fields=['username', 'first_name', 'last_name'],
+    list_columns=dict(
+        student=columns.Column(verbose_name='Student'),
+        professor=columns.Column(verbose_name='Professor'),
+    ),
+    delete=True,
+)
 
-class StudentListView(TableView):
-    def get_queryset(self, **kwargs):
-        # TODO: read student from request
-        return Student.objects.all()
+student_views = create_basic_crud(
+    Student, 'staff_student',
+    create_fields=['user'],
+    list_fields=['id', 'user.username', 'user.first_name', 'user.last_name'],
+    edit_fields=['user'],
+    delete=True,
+)
 
-    create_url = reverse_lazy('index')
-
-    class Table(tables.Table):
-        class Meta:
-            model = Student
-            fields = ('id', 'user.first_name', 'user.last_name', 'user.username')
+professor_views = create_basic_crud(
+    Professor, 'staff_professor',
+    create_fields=['user'],
+    list_fields=['id', 'user.username', 'user.first_name', 'user.last_name'],
+    edit_fields=['user'],
+    delete=True,
+)

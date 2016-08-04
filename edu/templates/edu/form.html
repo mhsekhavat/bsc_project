@@ -1,0 +1,15 @@
+{% extends 'edu/dashboard.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <form method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
+            <a class="btn btn-default" href="#" onclick="window.history.back(); return false;" class="button cancel-link">No, take me back</a>
+        {% endbuttons %}
+    </form>
+{% endblock %}

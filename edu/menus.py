@@ -20,7 +20,9 @@ Menu.add_item('main', MenuItem("Student Panel",
                                ))
 
 staff_children = (
-    MenuItem("Students", reverse('staff_students')),
+    MenuItem("Users", reverse('staff_user_list')),
+    MenuItem("Students", reverse('staff_student_list')),
+    MenuItem("Professors", reverse('staff_professor_list')),
 )
 
 Menu.add_item('main', MenuItem("Staff Panel",
