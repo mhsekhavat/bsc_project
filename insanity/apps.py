@@ -1,13 +1,15 @@
 import logging
 import importlib
 import inspect
+from collections import defaultdict
+
 from django.apps import AppConfig, apps
 
 from insanity.sanity_check import SanityCheck
 
 logger = logging.getLogger('insanity')
 
-all_checks = []
+all_checks = defaultdict(list)
 
 
 class InsanityConfig(AppConfig):
@@ -23,6 +25,6 @@ class InsanityConfig(AppConfig):
 
                 for name, obj in inspect.getmembers(checks, inspect.isclass):
                     if obj.__module__ == check_name and issubclass(obj, SanityCheck):
-                        all_checks.append(obj)
+                        all_checks[obj.action_name].append(obj)
             except:
                 pass

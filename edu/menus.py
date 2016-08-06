@@ -9,7 +9,7 @@ Menu.add_item('main', MenuItem("Professor Panel",
                                ))
 
 student_children = (
-    MenuItem("My Courses", reverse('student_enrollments')),
+    MenuItem("My Courses", reverse('student_enrollment_list')),
 )
 
 Menu.add_item('main', MenuItem("Student Panel",
@@ -23,6 +23,9 @@ staff_children = (
     MenuItem("Users", reverse('staff_user_list')),
     MenuItem("Students", reverse('staff_student_list')),
     MenuItem("Professors", reverse('staff_professor_list')),
+    MenuItem("Courses", reverse('staff_course_list')),
+    MenuItem("Semesters", reverse('staff_semester_list')),
+    MenuItem("Offerings", reverse('staff_offering_list')),
 )
 
 Menu.add_item('main', MenuItem("Staff Panel",

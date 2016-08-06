@@ -57,8 +57,8 @@ def basic_crud(name_prefix, create_view=None, list_view=None, edit_view=None, de
 staff_required = user_passes_test(lambda user: user.is_staff)
 
 student_urls = [
-    url(r'^$', RedirectView.as_view(url=reverse_lazy('student_enrollments')), name='student'),
-    url(r'^enrollments/$', student.EnrollmentListView.as_view(), name='student_enrollments'),
+    url(r'^$', RedirectView.as_view(url=reverse_lazy('student_enrollment_list')), name='student'),
+    url(r'^enrollments/', include(basic_crud('student_enrollment', **student.enrollment_views))),
 ]
 
 professor_urls = [
@@ -70,6 +70,11 @@ staff_urls = [
     url(r'^users/', include(basic_crud('staff_user', **staff.user_views))),
     url(r'^students/', include(basic_crud('staff_student', **staff.student_views))),
     url(r'^professors/', include(basic_crud('staff_professor', **staff.professor_views))),
+    url(r'^courses/', include(basic_crud('staff_course', **staff.course_views) + [
+        url(r'^(?P<pk>\d+)/capacity/$', staff.OfferingChangeCapacityView.as_view(), name='staff_offering_capacity')
+    ])),
+    url(r'^semesters/', include(basic_crud('staff_semester', **staff.semester_views))),
+    url(r'^offering/', include(basic_crud('staff_offering', **staff.offering_views))),
 ]
 
 urlpatterns = [

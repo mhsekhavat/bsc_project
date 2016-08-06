@@ -58,3 +58,5 @@ class OfferingFactory(factory.Factory):
     semester = fuzzy.FuzzyChoice(Semester.objects.all())
     professor = fuzzy.FuzzyChoice(Professor.objects.all())
     capacity = fuzzy.FuzzyInteger(0, 10)
+    available_capacity = factory.LazyAttribute(lambda self: self.capacity)
+    is_enrollable = fuzzy.FuzzyChoice([True, False])

@@ -118,7 +118,7 @@ def create_basic_crud(model, url_prefix,
             (EDUUpdateView,),
             dict(
                 model=model,
-                fields=create_fields,
+                fields=edit_fields,
                 success_url=success_url,
             )
         )

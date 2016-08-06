@@ -1,27 +1,60 @@
-from edu.models import Offering
+import inspect
+
+from edu.models import Enrollment, EnrollmentError
 from insanity.sanity_check import SanityCheck
 
 
-def unbind_and_compare(bound_method, class_method):
-    # TDOO: this is a very bad toff! find the correct implementation!
-    import inspect
-    return inspect.getsource(bound_method) == inspect.getsource(class_method)
+class EnrollmentCheck1(SanityCheck):
+    action_name = 'edu.models.Offering.enroll'
 
-
-class CapacityCheck(SanityCheck):
-    def given(self, offering, student, **kwargs):
-        self.old_capacity = offering.capacity
+    def given(check, self, student, **kwargs):
+        check.old_capacity = self.available_capacity
         return True
 
-    def when(self, *args, func, **kwargs):
-        return unbind_and_compare(func, Offering.enroll)
+    def when(check, commit, **kwargs):
+        return commit
 
-    def then(self, offering, student, return_value, **kwargs):
-        if return_value:  # TODO: this condition should be moved to either `when` or `given`
-            assert self.old_capacity > 0
-            assert offering.capacity == self.old_capacity - 1
-            # assert student in offering.get_students() TODO: implement
-            # assert student.get_current_semester_units() <= student.get_max_units() TODO: implement
-        else:
-            pass
-            # TODO: assert
+    def then(check, payload, return_value, exc_type, **kwargs):
+        assert exc_type is None
+        assert check.old_capacity > 0
+        assert payload['self'].available_capacity == check.old_capacity - 1
+        assert isinstance(return_value, Enrollment)
+        print('checked1')
+
+
+class EnrollmentCheck2(SanityCheck):
+    action_name = 'edu.models.Offering.enroll'
+
+    def given(check, self, **kwargs):
+        return self.available_capacity == 0
+
+    def then(check, exc_type, **kwargs):
+        assert issubclass(exc_type, EnrollmentError)
+        print('checked2')
+
+
+class EnrollmentCheck3(SanityCheck):
+    action_name = 'edu.models.Offering.enroll'
+
+    def then(check, payload, **kwargs):
+        offering = payload['self']
+        assert offering.capacity - offering.available_capacity == Enrollment.objects.filter(offering=offering).count()
+        print('checked3')
+
+
+class MyContextCheck4(SanityCheck):
+    action_name = 'myContextAction'
+
+    def then(check, payload, **kwargs):
+        offering = payload['offering']
+        assert offering.capacity - offering.available_capacity == Enrollment.objects.filter(offering=offering).count()
+        print('checked4')
+
+
+class MyContextCheck5(SanityCheck):
+    action_name = 'myContextAction'
+
+    def then(check, payload, **kwargs):
+        offering = payload['offering']
+        assert not offering.is_enrollable
+        print('checked5')

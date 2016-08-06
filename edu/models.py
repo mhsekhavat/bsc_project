@@ -28,26 +28,50 @@ class Professor(models.Model):
         return 'Professor%d' % (self.id or -1)
 
 
+class EnrollmentError(Exception):
+    pass
+
+
+class ChangeCapacityError(Exception):
+    pass
+
+
 class Offering(models.Model):
     course = models.ForeignKey('edu.Course')
-    # time = models.time
     semester = models.ForeignKey('edu.Semester')
     professor = models.ForeignKey('edu.Professor')
     capacity = models.IntegerField()
+    available_capacity = models.IntegerField()
+    is_enrollable = models.BooleanField(default=False)
 
-    @action
-    def enroll(self, student):
-        if self.capacity == 0:
-            return False
+    @action()
+    def enroll(self, student, commit=True):
+        if self.available_capacity == 0:
+            raise EnrollmentError("There is no available capacity")
+        if not self.is_enrollable:
+            raise EnrollmentError("This offering is not enabled for enrollment")
+
         Enrollment = apps.get_model('edu.Enrollment')
-        Enrollment.objects.create(offering=self, student=student)
-        self.capacity = self.capacity - 1
-        self.save()
-        return True
+        enrollment = Enrollment(offering=self, student=student)
+        if commit:
+            enrollment.save()
+            self.available_capacity = self.available_capacity - 1
+            self.save()
+        return enrollment
 
-    @action
     def get_students(self):
         return Student.objects.filter(id__in=self.enrollment_set.values_list('student', flat=True))
+
+    def change_capacity(self, new_capacity, commit=True):
+        enrollment_count = self.capacity - self.available_capacity
+        if new_capacity < enrollment_count:
+            raise ChangeCapacityError(
+                'There are already %d enrollments which is less than %d' % (enrollment_count, new_capacity)
+            )
+        self.capacity = new_capacity
+        self.available_capacity = new_capacity - enrollment_count
+        if commit:
+            self.save()
 
 
 class Enrollment(models.Model):

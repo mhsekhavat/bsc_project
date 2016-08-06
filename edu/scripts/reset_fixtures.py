@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 
 from edu.factory import StudentFactory, CourseFactory, SemesterFactory, OfferingFactory, ProfessorFactory
-from edu.models import Course, Student, Semester, Professor
+from edu.models import Course, Student, Semester, Professor, Offering, EnrollmentError
 import random
 
 
@@ -36,7 +36,16 @@ def run():
     for o in offerings:
         o.save()
 
-    for i in range(50):
-        offering = random.choice(offerings)
+    for i in range(10):
+        offering = random.choice(list(Offering.objects.filter(available_capacity__gt=0, is_enrollable=True)))
         student = random.choice(students)
         offering.enroll(student)
+
+    try:
+        offering = random.choice(list(Offering.objects.filter(available_capacity=0)))
+        student = random.choice(students)
+        offering.enroll(student, commit=False)
+    except EnrollmentError:
+        "That's OK"
+        pass
+

@@ -1,9 +1,14 @@
 class SanityCheck(object):
-    def given(self, **kwargs):
-        pass
+    action_name = None
 
-    def when(self, **kwargs):
-        pass
+    def __init__(check, action):
+        check.action = action
 
-    def then(self, **kwargs):
-        pass
+    def given(check, **kwargs):
+        return True
+
+    def when(check, **kwargs):
+        return True
+
+    def then(check, exc_type, **kwargs):
+        assert exc_type is None
