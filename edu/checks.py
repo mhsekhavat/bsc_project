@@ -7,11 +7,11 @@ from insanity.sanity_check import SanityCheck
 class EnrollmentCheck1(SanityCheck):
     action_name = 'edu.models.Offering.enroll'
 
-    def given(check, self, student, **kwargs):
+    def given(check, self, student, **payload):
         check.old_capacity = self.available_capacity
         return True
 
-    def when(check, commit, **kwargs):
+    def when(check, commit, **payload):
         return commit
 
     def then(check, payload, return_value, exc_type, **kwargs):
@@ -25,7 +25,7 @@ class EnrollmentCheck1(SanityCheck):
 class EnrollmentCheck2(SanityCheck):
     action_name = 'edu.models.Offering.enroll'
 
-    def given(check, self, **kwargs):
+    def given(check, self, **payload):
         return self.available_capacity == 0
 
     def then(check, exc_type, **kwargs):
