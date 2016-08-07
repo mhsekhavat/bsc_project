@@ -42,8 +42,8 @@ class EnrollmentCheck3(SanityCheck):
         print('checked3')
 
 
-class MyContextCheck4(SanityCheck):
-    action_name = 'myContextAction'
+class SampleContextCheck4(SanityCheck):
+    action_name = 'offeringCapacityChangeByStaff'
 
     def then(check, payload, **kwargs):
         offering = payload['offering']
@@ -51,8 +51,8 @@ class MyContextCheck4(SanityCheck):
         print('checked4')
 
 
-class MyContextCheck5(SanityCheck):
-    action_name = 'myContextAction'
+class SampleContextCheck5(SanityCheck):
+    action_name = 'offeringCapacityChangeByStaff'
 
     def then(check, payload, **kwargs):
         offering = payload['offering']

@@ -92,7 +92,7 @@ class OfferingChangeCapacityView(UpdateView):
 
             def save(self, commit=True):
                 new_capacity = self.instance.capacity
-                with action('myContextAction', offering=self.instance):
+                with action('offeringCapacityChangeByStaff', offering=self.instance):
                     self.instance.change_capacity(new_capacity, commit=commit)
                 return self.instance
 
