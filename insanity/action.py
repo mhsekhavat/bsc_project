@@ -77,9 +77,9 @@ class action(object):
 
         @functools.wraps(func)
         def inner(*args, **kwargs):
-            with self._build_context_manager(signature, name, args, kwargs) as context_action:
+            with self._build_context_manager(signature, name, args, kwargs) as action_instance:
                 return_value = func(*args, **kwargs)
-                context_action.return_value = return_value
+                action_instance.return_value = return_value
                 return return_value
 
         return inner
