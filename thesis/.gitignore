@@ -34,3 +34,5 @@
 *.glsdefs
 *.run.xml
 *~
+.#*
+*.pdf

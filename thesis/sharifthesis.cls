@@ -3,6 +3,7 @@
 
 \LoadClass[12pt,a4paper,BCOR=.7cm,headsepline,bibliography=totoc,chapterprefix=true]{scrbook}
 
+\DeclareOption{BScThesis}{\def\@fordegree{\if@Latin B. Sc. Thesis\else پایان‌نامه‌ی کارشناسی\fi}}
 \DeclareOption{MScThesis}{\def\@fordegree{\if@Latin M. Sc. Thesis\else پایان‌نامه‌ی کارشناسی ارشد\fi}}
 \DeclareOption{PhDThesis}{\def\@fordegree{\if@Latin Ph. D. Thesis\else پایان‌نامه‌ی دکتری\fi}}
 \DeclareOption{PhDProposal}{\def\@fordegree{\if@Latin Ph. D. Research Proposal\else پیشنهاد پژوهشی دکتری\fi}}

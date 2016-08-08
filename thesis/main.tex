@@ -1,4 +1,4 @@
-\documentclass[MScThesis,twoside]{sharifthesis}
+\documentclass[BScThesis,twoside]{sharifthesis}
 %\documentclass[MScThesis,oneside]{sharifthesis}
 %\documentclass[PhDThesis,twoside]{sharifthesis}
 %\documentclass[PhDThesis,oneside]{sharifthesis}
@@ -15,7 +15,7 @@
 %if title is long and requires to be splitted in two lines, uncomment following two definitions and split title at appropriate location
 %\def\enTitleLineOne{First line of the long title}
 %\def\enTitleLineTwo{and its continuation on the second line}
-\def\enAuthor{‌Behnam Momeni}
+\def\enAuthor{Seyed Mehran Kholdi, Mohammad Hossein Sekhavat}
 \def\enKeywords{First Key Word, Second Key Word, Final Key Word}
 
 
@@ -23,14 +23,13 @@
 \addbibresource{resources/resources.bib}
 
 
-\newcommand{\faKeywords}{واژه‌ی کلیدی نخست،
-واژه‌ی کلیدی دوم،
-واژه‌ی کلیدی پایانی}
+\newcommand{\faKeywords}{تست، رفتار رانه، سناریو، مستقل‌سازی
+}
 \eqcommand{واژه‌های‌کلیدی}{faKeywords}
 \آرم{\درج‌تصویر[scale=.7]{logo}}
 \تاریخ{شهریور ۱۳۹۴}
 %در دستور زیر، از \\ استفاده نکنید
-\عنوان{عنوان پایان‌نامه}
+\عنوان{مستقل‌سازی سناریو از تست رفتار رانه}
 %اگر عنوان طولانی بوده (و در عنوان انگلیسی از دو خظ استفاده شده) باید دو خط زیر از کامنت خارج و دو خط عنوان توسط آن‌ها تعریف گردد.
 %\عنوانخطیک{خط نخست عنوان طولانی}
 %\عنوانخطدو{و ادامه‌ی آن در خط دوم}
@@ -40,11 +39,11 @@
 دانشکده‌ی مهندسی کامپیوتر}
 \دانشگاه‌عادی{دانشگاه صنعتی شریف\\
 دانشکده‌ی مهندسی کامپیوتر}
-\موضوع{گرایش به زبان پارسی}
+\موضوع{گرایش نرم‌افزار}
 \استادراهنما{دکتر سید حسن میریان}
 %اگر استاد مشاور ندارید، خط زیر را comment کنید
 %همچنین، فراموش نکنید در آخر این پرونده، اطلاعات انگلیسی معادل این دستورها را هم پر کنید
-\استادمشاور{دکتر <نام استاد مشاور>} 
+%\استادمشاور{دکتر <نام استاد مشاور>} 
 
 \newcommand{\efootnote}[1]{\footnote{\lr{#1}}}
 \newcommand{\ecfootnote}[1]{}
@@ -87,18 +86,6 @@
 \StartDocument
 %\makethesistitle
 
-\pagestyle{pagenumberonlyPagestyle}
-% following parts are not required in PhD proposal and should be removed. BEGIN OF COMMENT FOR PhD Proposal........
-%صفحه‌ی تصویب در پیشنهاد پژوهشی وجود ندارد.
-\شروع{تصویب}
-%خط‌های زیر در صورت نبود استاد مدعو comment شوند
-\داور{استاد مدعو}{دکتر <نام استاد مدعو ۱>}
-\داور{استاد مدعو}{دکتر <نام استاد مدعو ۲>}
-\پایان{تصویب}
-\newpage
-
-\تقدیم{\درشت تقدیم به ...؛   صفحه‌ی تقدیم اختیاری است.} 
-
 \setlength{\baselineskip}{0.9cm}
 \begin{comment}
 \فصل*{پیش‌گفتار}
@@ -107,7 +94,9 @@
 \end{comment}
 
 \شروع{قدردانی}
-صفحه‌ی قدردانی. این صفحه اختیاری بوده و می‌توانید آن را حذف کنید. برای این کار کافی است محیط قدردانی در پرونده‌ی تِک را حذف کنید. متداول است که در این صفحه از خانواده، استادها و همکارهای خود قدردانی نمایید.
+از جناب آقای دکتر مصطفی مهدیه به خاطر کمک‌ها، مشورت‌ها و پیگیری‌های
+عالمانه و دلسوزانه‌ی ایشان قدردانی می‌نماییم.
+
 \پایان{قدردانی}
 % END OF COMMENT FOR PhD Proposal.
 
@@ -164,3 +153,8 @@
 \end{abstract}
 \makethesistitle
 \پایان{نوشتار}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
