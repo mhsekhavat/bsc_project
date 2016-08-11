@@ -1,0 +1,11 @@
+machine:
+    python:
+        version: 3.5
+
+test:
+    pre:
+      - npm install
+      - pip install -r requirements.txt
+      - ./manage.py migrate
+    override:
+      - ./manage.py runscript reset_fixtures
