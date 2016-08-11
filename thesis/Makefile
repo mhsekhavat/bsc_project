@@ -15,13 +15,9 @@ TEXOPTIONS=-halt-on-error -shell-escape -interaction=nonstopmode -synctex=-1 -ou
 
 # Included tex files (not the main file)
 TEX0=sharifthesis.cls \
-	./general/thesis_content.tex ./general/translitaration.tex \
-	./general/abstract.tex ./general/abstract-en.tex \
-	./general/preamble.tex ./general/glossaries.tex \
-	./introduction/introduction.tex \
-	./introduction/writing.tex ./introduction/structure.tex \
-	./future_works/future_works.tex
-
+	$(wildcard ./general/*.tex) \
+	$(wildcard ./introduction/*.tex) \
+	$(wildcard ./future_works/*.tex)
 
 
 # Biblography items
